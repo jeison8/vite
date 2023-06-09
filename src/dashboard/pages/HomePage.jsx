@@ -22,6 +22,7 @@ export const HomePage = () => {
   const [filter, setFilter] = useState({name: '', date: null});
 
   useEffect(() => {
+    console.log(total, limit);
     paginate(page,limit,filter);
   }, [])
 
@@ -54,13 +55,12 @@ export const HomePage = () => {
   }
 
   const onPageChange = (event) => {
-    dispatch( setPage(user) );
     paginate(event.page+1,event.rows,filter);
   }
 
   const filterChange = (event) => {
-      if(!/^[a-zA-Z\s]*$/.test(event.target.value)) return;
-      setFilter({...filter, name: event.target.value})
+    if(!/^[a-zA-Z\s]*$/.test(event.target.value)) return;
+    setFilter({...filter, name: event.target.value})
   }
 
   const filterChangeDate = (event) => {
