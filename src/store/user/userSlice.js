@@ -5,9 +5,9 @@ export const userSlice = createSlice({
     initialState: {
         // for get all
         users: [],
-        page: 1,
-        limit: 0,
-        total: 0,
+        rows: 0,
+        page: 0,
+        totalDocs: 0,
         //for create
         id: '',
         document: '',
@@ -22,9 +22,9 @@ export const userSlice = createSlice({
     },
     reducers: {
         getUsers: ( state, { payload } ) => {
-            state.limit = payload.users.limit;
             state.users = payload.users.docs;
-            state.total = payload.users.totalDocs;
+            state.rows = payload.users.limit;
+            state.totalDocs = payload.users.totalDocs;
         },
         createUserSuccess: ( state, { payload } ) => {
             state.document = '';

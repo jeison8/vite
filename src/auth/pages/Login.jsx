@@ -2,7 +2,6 @@ import { Button } from 'primereact/button';
 import { Toast } from 'primereact/toast';
 import { InputText } from 'primereact/inputtext';
 import { Password } from 'primereact/password';
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
 import { login } from '../../store/auth/thunks';
 import { useEffect, useRef } from 'react';

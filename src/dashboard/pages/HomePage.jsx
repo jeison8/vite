@@ -16,22 +16,18 @@ import { useNavigate } from 'react-router-dom';
 export const HomePage = () => {
 
   const toast = useRef(null);
+  const [first, setFirst] = useState(0);
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { page,limit,total,users,error } = useSelector(state => state.user);
   const [filter, setFilter] = useState({name: '', date: null});
+  const { rows,totalDocs,users,error } = useSelector(state => state.user);
 
-  useEffect(() => {
-    console.log(total, limit);
-    paginate(page,limit,filter);
-  }, [])
-
-  useEffect(() => {
-    debounceFilterChange(page,limit,filter);
+  useEffect(() => { 
+    debounceFilterChange(0,rows,filter);
   }, [filter.name]);
 
   useEffect(() => {
-    paginate(page,limit,filter);
+    paginate(0,rows,filter);
   }, [filter.date]);
 
   useEffect(() => {
@@ -55,6 +51,7 @@ export const HomePage = () => {
   }
 
   const onPageChange = (event) => {
+    setFirst(event.first);
     paginate(event.page+1,event.rows,filter);
   }
 
@@ -155,11 +152,12 @@ export const HomePage = () => {
         <Column header="Vencimiento" body={actionsTemplateDateEnd}/>
         <Column header="Acciones" body={actionsTemplate} />
       </DataTable>
-      <Paginator first={page} 
-                 rows={limit} 
-                 totalRecords={total} 
-                 rowsPerPageOptions={[10, 20, 30]} 
-                 onPageChange={onPageChange} >
+      <Paginator first={first}
+                 rows={rows}
+                 totalRecords={totalDocs}
+                 rowsPerPageOptions={[10, 20, 30]}
+                 onPageChange={onPageChange}
+                >
       </Paginator>
     </div> 
   )

@@ -60,7 +60,7 @@ export const Consult = () => {
         setVisible(false);
         resetForm();
         dispatch( changeAccess({}) );
-      }, 8000);
+      }, 4000);
     }
   }, [intoIt]);
 

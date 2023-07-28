@@ -11,6 +11,7 @@ export const authSlice = createSlice({
         access: {},
         //erros
         loginError: '',
+        showError: ''
     },
     reducers: {
         //login
@@ -33,7 +34,14 @@ export const authSlice = createSlice({
         },
         // errors
         errorMessage: ( state, payload ) => {
-            if( payload.type === 'auth/errorMessage' ) state.loginError = payload.payload;
+            if( payload.payload === 'La clave de ingreso es incorrecta' ) state.showError = payload.payload;
+            if( payload.payload === 'El usuario no esta autorizado' ) state.loginError = payload.payload;
+            if( payload.payload === 'El password no es correcto' ) state.loginError = payload.payload;
+            if( payload.payload === 'El documento no esta registrado' ) state.loginError = payload.payload;
+            if( payload.payload === '' ) {
+                state.showError = payload.payload;
+                state.loginError = payload.payload;
+            }
         }
     }
 });
